@@ -538,5 +538,4 @@ const menu = [
     ],
   },
 ];
-
-export default menu;
+export { menu };

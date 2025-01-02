@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
-import menu from '../utils/menu';
+import { MenuItem, MenuCategory } from '../utils/menu'; // Import only types
+import { menu } from '../utils/menu'; // Import the actual data
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { useCart } from '../context/cartContext';
 import { motion } from 'framer-motion';
 
-// Define types for product and category
-interface Product {
-  name: string;
-  description: string;
-  sizes?: { [size: string]: number };
-  image: string;
-}
+// // Define types for product and category
+// interface Product {
+//   name: string;
+//   description: string;
+//   sizes?: { [size: string]: number };
+//   image: string;
+// }
 
-interface Category {
-  name: string;
-  items: Product[];
-}
-interface SelectedSize {
-  [key: string]: string; // Assuming productName is a string, and size is a string as well.
-}
+// interface Category {
+//   name: string;
+//   items: Product[];
+// }
+// interface SelectedSize {
+//   [key: string]: string; // Assuming productName is a string, and size is a string as well.
+// }
 interface PriceInfo {
   [size: string]: string; // Mapping size to price (e.g., 'M': '150', 'L': '180')
 }
@@ -28,28 +29,27 @@ interface CartItem {
   prices?: PriceInfo; // Optional if different sizes have different prices
   price?: string; // Can be a string for cases like "Soon"
 }
-interface Props {
-  item: CartItem;
-  selectedSize: SelectedSize;
-  handleCartAction: (item: CartItem) => void;
-  isInCart: (itemName: string) => boolean;
-}
-interface Item {
-  name: string;
-  sizes?: string[];  // Sizes are optional
-  prices?: { [key: string]: string };  // Example of price per size
-  price?: string;  // Fallback price (if sizes don't exist)
-  image?: string;  // Image property
-}
+// interface Props {
+//   item: CartItem;
+//   selectedSize: SelectedSize;
+//   handleCartAction: (item: CartItem) => void;
+//   isInCart: (itemName: string) => boolean;
+// }
+// interface Item {
+//   name: string;
+//   sizes: string[];
+// }
 
 const Menu = () => {
-  const [selectedSize, setSelectedSize] = useState<SelectedSize>({});
+ const [selectedSize, setSelectedSize] = useState<{ [key: string]: string }>({});
   const { addToCart, removeFromCart, isInCart } = useCart();
 
   useEffect(() => {
-    const defaultSizes = {};
-    menu.forEach(category => {
-      category.items.forEach(item => {
+   const defaultSizes: { [key: string]: string } = {};
+
+
+    menu.forEach((category: MenuCategory) => {
+      category.items.forEach((item: MenuItem) => {
         if (item.sizes && item.sizes.length > 0) {
           defaultSizes[item.name] = item.sizes[0];
         }
@@ -126,9 +126,9 @@ const Menu = () => {
     const renderCartButton = () => (
       <button onClick={() => handleCartAction(item)}>
         {isInCart(item.name) ? (
-          <RemoveShoppingCartIcon size={30} className="text-red-600" />
+          <RemoveShoppingCartIcon fontSize="large" className="text-red-600" />
         ) : (
-          <ShoppingCartIcon size={30} className="text-emerald-600" />
+          <ShoppingCartIcon fontSize="large" className="text-emerald-600" />
         )}
       </button>
     );
@@ -162,7 +162,7 @@ const Menu = () => {
         <div className="mb-4">
           <p className="text-sm text-amber-700 font-bold delius-font mb-2">Select Size:</p>
           <div className="flex flex-wrap gap-2">
-            {item.sizes.map((size) => (
+            {item.sizes.map((size: string) => (
               <button
                 key={size}
                 onClick={() => handleSizeSelect(item.name, size)}
@@ -196,7 +196,7 @@ const Menu = () => {
           Our Menu
         </motion.h2>
         
-        {menu.map((category) => (
+        {menu.map((category:MenuCategory) => (
           <div key={category.category} className="mb-16">
             <motion.h3 
               variants={fadeInVariants}
@@ -215,7 +215,7 @@ const Menu = () => {
               viewport={{ once: true, margin: "-100px" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
-              {category.items.map((item, itemIndex) => (
+             {category.items.map((item: MenuItem, itemIndex: number) => (
               <motion.div
                 key={`${category.category}-${itemIndex}`}
                 variants={itemVariants}

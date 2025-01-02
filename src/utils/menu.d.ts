@@ -1,7 +1,7 @@
 export type MenuItem = {
   name: string;
   price: string | number;
-  sizes: string;
+  sizes: string[];
   image: string;
 };
 
@@ -10,7 +10,4 @@ export type MenuCategory = {
   items: MenuItem[];
 };
 
-declare module '../utils/menu' {
-  const menu: MenuCategory[];
-  export default menu;
-}
+export const menu: MenuCategory[];

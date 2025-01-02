@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "outDir": "./dist",  // Specify the output directory for compiled JS files
+    "rootDir": "./src",  // Specify the root directory for your source files
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "include": [
-    "src/**/*"
-  ],
-  
+    "src/**/*"  // Include all files in the src folder
+  ]
 }
