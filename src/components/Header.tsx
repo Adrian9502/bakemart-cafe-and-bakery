@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ShoppingCart } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/cartContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

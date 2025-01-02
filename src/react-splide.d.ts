@@ -1,4 +1,5 @@
 declare module '@splidejs/react-splide' {
-  export * from '@splidejs/react-splide/dist/types';
+  import { ComponentType } from 'react';
+  const Splide: ComponentType<any>;
+  export { Splide };
 }
-declare module '@splidejs/react-splide/css';

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import menu from '../utils/menu';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/cartContext';
 import { motion } from 'framer-motion';
 
 // Define types for product and category
