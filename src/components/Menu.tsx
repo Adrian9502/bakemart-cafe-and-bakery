@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { MenuItem, MenuCategory } from '../utils/menu'; // Import only types
 import { menu } from '../utils/menu'; // Import the actual data
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";

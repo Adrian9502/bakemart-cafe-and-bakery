@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { FaReact,FaGithub } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
+import React from 'react';
 
 export default function Footer() {
   return (

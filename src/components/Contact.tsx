@@ -1,5 +1,5 @@
 import { Clock, MapPin, Phone } from 'lucide-react';
-
+import React from 'react';
 export default function Contact() {
   return (
     <div id="contact" className="py-16 pattern-topography">

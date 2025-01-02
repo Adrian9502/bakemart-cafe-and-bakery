@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { menu } from "../utils/menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { useCart } from "../context/cartContext";
 import { motion } from "framer-motion";
+
 const Menu = () => {
   const [selectedSize, setSelectedSize] = useState({});
   const { addToCart, removeFromCart, isInCart } = useCart();
