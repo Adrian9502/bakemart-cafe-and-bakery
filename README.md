@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Bakemart - Cafe & Bakery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+**Bakemart - Cafe & Bakery** is a visually appealing, interactive website designed for a bakery. The website serves as an online menu and information portal for a cafe and bakery business. It showcases a variety of bakery products, with detailed descriptions, prices, and high-quality images. In addition, it provides essential features like location details, contact information, and an online ordering system for a seamless customer experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Responsive Design**: Fully responsive, providing a smooth experience across desktop, tablet, and mobile devices.
+- **Product Showcase**: Displays various bakery items with their descriptions, images, and prices.
+- **Smooth Navigation**: Clean and simple navigation to easily browse products and services.
+- **Online Ordering**: Users can add bakery items to their cart for easy online ordering.
+- **Contact Information**: Includes contact details such as phone numbers, address, and links to social media accounts.
+- **About Us**: Learn more about the cafe's history, vision, and values.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **React**: Component-based architecture used to create a maintainable and scalable website.
+- **Tailwind CSS**: Utility-first CSS framework to quickly build custom designs.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Overview
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![Alt text](preview/1.png)
+![Alt text](preview/2.png)
+![Alt text](preview/3.png)
+![Alt text](preview/4.png)
