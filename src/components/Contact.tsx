@@ -1,4 +1,3 @@
-import React from 'react';
 import { Clock, MapPin, Phone } from 'lucide-react';
 
 export default function Contact() {

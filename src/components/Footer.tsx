@@ -1,4 +1,3 @@
-import React from 'react'
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { FaReact,FaGithub } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
