@@ -17,9 +17,33 @@ interface Category {
   name: string;
   items: Product[];
 }
+interface SelectedSize {
+  [key: string]: string; // Assuming productName is a string, and size is a string as well.
+}
+interface PriceInfo {
+  [size: string]: string; // Mapping size to price (e.g., 'M': '150', 'L': '180')
+}
+interface CartItem {
+  name: string;
+  prices?: PriceInfo; // Optional if different sizes have different prices
+  price?: string; // Can be a string for cases like "Soon"
+}
+interface Props {
+  item: CartItem;
+  selectedSize: SelectedSize;
+  handleCartAction: (item: CartItem) => void;
+  isInCart: (itemName: string) => boolean;
+}
+interface Item {
+  name: string;
+  sizes?: string[];  // Sizes are optional
+  prices?: { [key: string]: string };  // Example of price per size
+  price?: string;  // Fallback price (if sizes don't exist)
+  image?: string;  // Image property
+}
 
 const Menu = () => {
-  const [selectedSize, setSelectedSize] = useState({});
+  const [selectedSize, setSelectedSize] = useState<SelectedSize>({});
   const { addToCart, removeFromCart, isInCart } = useCart();
 
   useEffect(() => {
@@ -73,26 +97,34 @@ const Menu = () => {
     }
   };
 
-  const handleSizeSelect = (productName, size) => {
-    setSelectedSize((prev) => ({
-      ...prev,
-      [productName]: size,
-    }));
+  const handleSizeSelect = (productName: string, size: string): void => {
+  setSelectedSize((prev) => ({
+    ...prev,
+    [productName]: size,
+  }));
+};
+
+  const handleCartAction = (item: CartItem): void => {
+  if (isInCart(item.name)) {
+    removeFromCart(item.name);
+  } else {
+    addToCart(item.name);
+  }
   };
 
-  const handleCartAction = (item) => {
-    if (isInCart(item.name)) {
-      removeFromCart(item.name);
-    } else {
-      addToCart(item.name);
-    }
-  };
-
-  const renderPrice = (item) => {
+  const renderPrice = ({
+    item,
+    selectedSize,
+    handleCartAction,
+    isInCart,
+  }: {
+    item: CartItem;  // Ensure item is treated as a CartItem
+    selectedSize: { [key: string]: string };
+    handleCartAction: (item: CartItem) => void;
+    isInCart: (name: string) => boolean;
+  }): JSX.Element | null => {
     const renderCartButton = () => (
-      <button
-        onClick={() => handleCartAction(item)}
-      >
+      <button onClick={() => handleCartAction(item)}>
         {isInCart(item.name) ? (
           <RemoveShoppingCartIcon size={30} className="text-red-600" />
         ) : (
@@ -123,7 +155,8 @@ const Menu = () => {
     return null;
   };
 
-  const renderSizeOptions = (item) => {
+
+  const renderSizeOptions = (item: MenuItem): JSX.Element | null => {
     if (item.sizes) {
       return (
         <div className="mb-4">
@@ -148,6 +181,7 @@ const Menu = () => {
     }
     return null;
   };
+
 
   return (
     <div id="menu" className="py-16 pattern-topography bg-gray-50">
@@ -182,27 +216,33 @@ const Menu = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
               {category.items.map((item, itemIndex) => (
-                <motion.div
-                  key={`${category.category}-${itemIndex}`}
-                  variants={itemVariants}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="relative h-48">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>      
-                  <div className="p-4">
-                    <h4 className="font-bold delius-font text-lg mb-2 text-gray-800">
-                      {item.name} 
-                    </h4>                
-                    {renderSizeOptions(item)}
-                    {renderPrice(item)}
-                  </div>
-                </motion.div>
-              ))}
+              <motion.div
+                key={`${category.category}-${itemIndex}`}
+                variants={itemVariants}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-48">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>      
+                <div className="p-4">
+                  <h4 className="font-bold delius-font text-lg mb-2 text-gray-800">
+                    {item.name} 
+                  </h4>                
+                  {renderSizeOptions(item as MenuItem)} {/* Cast item to MenuItem */}
+                  {renderPrice({
+                    item: item as CartItem,  // Cast item to CartItem
+                    selectedSize,
+                    handleCartAction,
+                    isInCart
+                  })}
+
+                </div>
+              </motion.div>
+            ))}
             </motion.div>
           </div>
         ))}
